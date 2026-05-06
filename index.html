@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Budapest Metrói - Menü</title>
+</head>
+<body>
+    <div class="menu">
+        <h1>Budapest Metrói</h1>
+
+        <p>Add meg a neved:</p>
+
+        <input type="text" id="player-name" placeholder="Név...">
+        <button class="start-btn">Játék indítása</button>
+
+
+        <button class="rules-btn">Szabályok</button>
+    </div>
+
+    <div id="rules-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">x</span>
+            <h2>Játékszabályok</h2>
+            <div class="rules-text">
+                <h3>Cél</h3>
+                    <p>Építsd meg Budapest metróhálózatát és gyűjts minél több pontot!</p>
+
+                <h3>Játékmenet</h3>
+                    <p>A játék 4 fordulóból áll, mindegyikben egy metróvonalat (M1/M2/M3/M4) építesz véletlenszerű sorrendben.</p>
+
+                    <h4>Szakaszépítés</h4>
+                        <p>Szakaszt úgy tudunk építeni, hogy rákattintunk a kezdetének szánt állomásra, és utána a célállomásra</p>
+                        <ul>
+                            <li>Felfordítunk egy megállókártyát (A, B, C, D vagy Joker)</li>
+                            <li>Húzz be egy szakaszt a metróvonal végéből a kártyán jelzett betűjű megállóba</li>
+                            <li>Az első szakasz a metróvonal kiinduló-megállóhelyéről indul</li>
+                            <li>Szakaszok csak vízszintesen, függőlegesen vagy 45 fokban haladhatnak</li>
+                            <li>Nem keresztezhetnek más szakaszt, csak megállónál</li>
+                            <li>Egy metróvonal nem mehet kétszer ugyanabba a megállóba (nincs hurok)</li>
+                            <li>Deák Ferenc tér Joker - bármilyen kártya esetén beköthető</li>
+                            <li>A szakaszépítés mindig opcionális - húzhatsz új kártyát rajzolás nélkül is</li>
+                        </ul>
+
+                    <h4>Forduló vége</h4>
+                        <p>Kétféle kártyánk van: peron középen és peron szélen. Mikor az egyikből felhúzunk ötöt, berajzoljuk a szakaszt és véget ér a kör</p>
+                    
+                <h3>Pontozás</h3>
+                    <h4>Fordulópontok (minden forduló után)</h4>
+                        <ul>
+                            <li>PK: Hány kerületet érint a metróvonal</li>
+                            <li>PM: Legtöbb megállóhely egy kerületben</li>
+                            <li>PD: Hányszor kel át a Dunán</li>
+                            <li>FP = (PK x PM) + PD</li>
+                        </ul>
+
+                    <h4>Végső pontszám (játék végén)</h4>
+                        <ul>
+                            <li>Fordulópontok összege: FP1 + FP2 + FP3 + FP4</li>
+                            <li>Pályaudvarok: Minden érintett pályaudvar után növekvő pont (0, 1, 2, 4, 6, 8, 11, 14, 17, 21, 25)</li>
+                            <li>Csomópontok: 2 vonal találkozása = 2 pont, 3 vonal = 5 pont, 4 vonal = 9 pont</li>
+                        </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/index.js"></script>
+</body>
+</html>

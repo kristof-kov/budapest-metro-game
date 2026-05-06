@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budapest Metrói - Játék</title>
+    <link rel="stylesheet" href="css/game.css" />
+</head>
+<body>
+    <div class="board-panel">
+        <div class="duna-overlay">
+            <img src="assets/duna.svg" alt="Duna">
+        </div>
+        <table></table>
+    </div>
+    <div class="right-panel">
+        <!-- Felső két panel egymás mellett -->
+        <div class="top-panels">
+            <!-- Kártya panel -->
+            <div id="card-panel">
+                <h3>Felhúzott kártya</h3>
+                <div id="current-card" class="card-display">Nincs</div>
+                <button id="draw-card-btn">Új kártya</button>
+            </div>
+
+            <!-- Metró panel -->
+            <div id="metro-panel">
+                <div class="current-metro-section">
+                    <h3>Aktuális metró</h3>
+                    <div id="current-line" class="current-metro-display">
+                        <span class="metro-icon">●</span>
+                        <span class="metro-name">-</span>
+                    </div>
+                    <h3>Sorrend</h3>
+                    <div id="line-order" class="order-metro-display">
+                        <span class="metro-1"></span>
+                        <span class="metro-2"></span>
+                        <span class="metro-3"></span>
+                        <span class="metro-4"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idő és név panel -->
+            <div id="time-name-panel">
+                <div class="name-section">
+                    <h3>Játékos</h3>
+                    <span class="name-display"></span>
+                </div>
+                <div class="time-section">
+                    <h3>Eltelt idő</h3>
+                    <p id="elapsed-time" class="time-display">0:00</p>
+                </div>
+            </div>
+
+            
+        </div>
+    
+    <div id="scoreboard-container">
+        <h2>Pontszámítás</h2>
+
+        <div id="scoreboard-grid">
+            <!-- Ikonok -->
+            <div class="icon-col">
+                <div class="icon-row"><img src="assets/pk.svg" alt="PK"></span></span></div>
+                <div class="symbol-row empty"></div>
+                <div class="icon-row"><img src="assets/pm.svg" alt="PM"></span></span></div>
+                <div class="symbol-row empty"></div>
+                <div class="icon-row"><img src="assets/pd.svg" alt="PD"></span></span></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+            </div>
+
+            <!-- 1. forduló -->
+            <div class="score-col">
+                <div class="score-row"><span id="pk-1" class="cell"></span></div>
+                <div class="symbol-row">x</div>
+                <div class="score-row"><span id="pm-1" class="cell"></span></div>
+                <div class="symbol-row">+</div>
+                <div class="score-row"><span id="pd-1" class="cell"></span></div>
+                <div class="symbol-row">=</div>
+                <div class="score-row"><span id="fp-1" class="cell"></span></div>
+            </div>
+
+            <div class="symbol-col">
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row">+</div>
+            </div>
+
+            <!-- 2. forduló -->
+            <div class="score-col">
+                <div class="score-row"><span id="pk-2" class="cell"></span></div>
+                <div class="symbol-row">x</div>
+                <div class="score-row"><span id="pm-2" class="cell"></span></div>
+                <div class="symbol-row">+</div>
+                <div class="score-row"><span id="pd-2" class="cell"></span></div>
+                <div class="symbol-row">=</div>
+                <div class="score-row"><span id="fp-2" class="cell"></span></div>
+            </div>
+
+            <div class="symbol-col">
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row">+</div>
+            </div>
+
+            <!-- 3. forduló -->
+            <div class="score-col">
+                <div class="score-row"><span id="pk-3" class="cell"></span></div>
+                <div class="symbol-row">x</div>
+                <div class="score-row"><span id="pm-3" class="cell"></span></div>
+                <div class="symbol-row">+</div>
+                <div class="score-row"><span id="pd-3" class="cell"></span></div>
+                <div class="symbol-row">=</div>
+                <div class="score-row"><span id="fp-3" class="cell"></span></div>
+            </div>
+
+            <div class="symbol-col">
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row">+</div>
+            </div>
+
+            <!-- 4. forduló -->
+            <div class="score-col">
+                <div class="score-row"><span id="pk-4" class="cell"></span></div>
+                <div class="symbol-row">x</div>
+                <div class="score-row"><span id="pm-4" class="cell"></span></div>
+                <div class="symbol-row">+</div>
+                <div class="score-row"><span id="pd-4" class="cell"></span></div>
+                <div class="symbol-row">=</div>
+                <div class="score-row"><span id="fp-4" class="cell"></span></div>
+            </div>
+
+            <div class="symbol-col">
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row">=</div>
+            </div>
+
+            <!-- Csomópont ikonok és fordulópontok összege-->
+            <div class="icon-col">
+                <div class="icon-row"><img src="assets/csp2.svg" alt="CSP2"></div>
+                <div class="symbol-row empty"></div>
+                <div class="icon-row"><img src="assets/csp3.svg" alt="CSP3"></div>
+                <div class="symbol-row empty"></div>
+                <div class="icon-row"><img src="assets/csp4.svg" alt="CSP4"></div>
+                <div class="symbol-row empty"></div>
+                <div class="score-row"><span id="fp-sum" class="cell"></span></div>
+            </div>
+
+            <div class="symbol-col">
+                <div class="symbol-row">x</div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row">x</div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row">x</div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row">+</div>
+            </div>
+
+            <!-- Csomópontok és vonatállomás-pontok -->
+            <div class="score-col">
+                <div class="score-row"><span id="csp2" class="cell"></span></div>
+                <div class="symbol-row empty"></div>
+                <div class="score-row"><span id="csp3" class="cell"></span></div>
+                <div class="symbol-row empty"></div>
+                <div class="score-row"><span id="csp4" class="cell"></span></div>
+                <div class="symbol-row empty"></div>
+                <div class="score-row"><span id="station-score" class="cell"></span></div>
+            </div>
+
+            <div class="symbol-col">
+                <div class="symbol-row">=</div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row">=</div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row">=</div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row">+</div>
+            </div>
+
+            <!-- Csomópontok beszorozva -->
+            <div class="score-col">
+                <div class="score-row"><span id="csp2result" class="cell"></span></div>
+                <div class="symbol-row">+</div>
+                <div class="score-row"><span id="csp3result" class="cell"></span></div>
+                <div class="symbol-row">+</div>
+                <div class="score-row"><span id="csp4result" class="cell"></span></div>
+                <div class="symbol-row">=</div>
+                <div class="score-row"><span id="csp-sum" class="cell"></span></div>
+            </div>
+
+            <div class="symbol-col">
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="symbol-row">=</div>
+            </div>
+
+            <!-- Végeredmény -->
+             <div class="score-col">
+                <div class="score-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="score-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="score-row empty"></div>
+                <div class="symbol-row empty"></div>
+                <div class="score-row"><span id="final-score" class="cell"></span></div>
+            </div>
+        </div>
+
+        <!-- Pályaudvarok -->
+        <div id="train-track">
+            <div id="train-cells">
+                <div id="train-icon"><img src="assets/train_icon.svg" alt="train icon"></div>
+
+                <div class="track-cell" id="slider-0">0</div>
+                <div class="track-cell" id="slider-1">1</div>
+                <div class="track-cell" id="slider-2">2</div>
+                <div class="track-cell" id="slider-3">4</div>
+                <div class="track-cell" id="slider-4">6</div>
+                <div class="track-cell" id="slider-5">8</div>
+                <div class="track-cell" id="slider-6">11</div>
+                <div class="track-cell" id="slider-7">14</div>
+                <div class="track-cell" id="slider-8">17</div>
+                <div class="track-cell" id="slider-9">21</div>
+                <div class="track-cell" id="slider-10">25</div>
+
+                <div id="arrow-icon"><img src="assets/arrow.svg" alt="arrow icon"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
