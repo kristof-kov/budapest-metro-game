@@ -96,3 +96,15 @@ export function clearHighlights() {
     document.querySelectorAll(".highlight")
         .forEach(el => el.classList.remove("highlight"));
 }
+
+/* --- game over --- */
+
+export function renderGameOverModal(total, seconds) {
+    const m = Math.floor(seconds / 60);
+    const s = seconds % 60;
+    const timeStr = `${m}:${s.toString().padStart(2, "0")}`;
+
+    document.querySelector("#gameover-score").textContent = total;
+    document.querySelector("#gameover-time").textContent = timeStr;
+    document.querySelector("#gameover-modal").classList.add("show");
+}

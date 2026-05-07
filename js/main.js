@@ -10,7 +10,7 @@ import {
     renderPlayerName, renderCurrentLine, renderLineOrder,
     renderCard, renderDrawButtonLabel,
     renderRoundScore, renderTrainTrack, renderFinalScore,
-    getElapsedSeconds,
+    getElapsedSeconds, renderGameOverModal
 } from "./ui.js";
 import { saveResult } from "./leaderboard.js";
 
@@ -91,8 +91,10 @@ function endGame() {
         name: gameState.playerName,
         total: final.total,
         seconds: getElapsedSeconds()
-    })
+    });
 
+    gameState.gameOver = true;
+    renderGameOverModal(final.total, getElapsedSeconds())
     console.log("game over:", final);
 }
 

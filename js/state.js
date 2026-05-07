@@ -67,7 +67,7 @@ export const lines = [
 export const CELL_SIZE = 70;
 
 export const gameState = {
-    playerName:        localStorage.getItem("playerName") ?? "",
+    playerName: localStorage.getItem("playerName") ?? "",
 
     // round progression
     metroOrder: [],   // shuffled in main.js on init
@@ -100,4 +100,5 @@ export const gameState = {
     outerPlatformCount: 0,
     innerPlatformCount: 0,
     lastDraw: false,
+    gameOver: false,
 };
