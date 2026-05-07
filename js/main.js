@@ -10,7 +10,9 @@ import {
     renderPlayerName, renderCurrentLine, renderLineOrder,
     renderCard, renderDrawButtonLabel,
     renderRoundScore, renderTrainTrack, renderFinalScore,
+    getElapsedSeconds,
 } from "./ui.js";
+import { saveResult } from "./leaderboard.js";
 
 const deck = new Deck();
 const scorer = new Scorer();
@@ -84,9 +86,14 @@ function endGame() {
     stopTimer();
     const final = scorer.calcFinal(gameState.globalLineStations);
     renderFinalScore(final);
-    console.log("game over:", final);
 
-    // TODO: save result to localStorage for leaderboard
+    saveResult({
+        name: gameState.playerName,
+        total: final.total,
+        seconds: getElapsedSeconds()
+    })
+
+    console.log("game over:", final);
 }
 
 /* --- event handlers --- */
