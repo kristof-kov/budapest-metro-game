@@ -11,7 +11,7 @@ let _svg = null;
 export function createSVGOverlay() {
     const boardPanel = document.querySelector(".board-panel");
     _svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    _svg.style.cssText = "position:absolute;top:0;left:0;width:600px;height:600px;pointer-events:none;";
+    _svg.style.cssText = "position:absolute;top:0;left:0;width:700px;height:700px;pointer-events:none;";
     boardPanel.style.position = "relative";
     boardPanel.appendChild(_svg);
 }
