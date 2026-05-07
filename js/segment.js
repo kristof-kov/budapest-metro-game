@@ -15,6 +15,7 @@ export function tryDrawSegment(a, b, color, svg) {
     if (isBlocked(a, b)) return false;
     if (hasSegmentBetween(a, b)) return false;
     if (wouldCreateLoop(a, b)) return false;
+    if (crossesExistingSegment(a, b)) return false;
 
     drawSegment(a, b, color, svg);
     _updateLineEnds(a, b);
@@ -86,6 +87,71 @@ export function wouldCreateLoop(a, b) {
         return inLine && !isEnd;
     }
     return gameState.lineStations.some(ls => ls.x === b.x && ls.y === b.y);
+}
+
+// returns true if the new segment crosses any already-drawn segment
+// at a point that is not a shared endpoint (station junction)
+export function crossesExistingSegment(a, b) {
+    for (const seg of gameState.drawnSegments) {
+        const p = { x: seg.x1, y: seg.y1 };
+        const q = { x: seg.x2, y: seg.y2 };
+        if (_segmentsIntersect(a, b, p, q)) return true;
+    }
+    return false;
+}
+
+// tests whether segment a->b and segment p->q intersect at a non-endpoint point
+function _segmentsIntersect(a, b, p, q) {
+    // 1. bounding-box pre-filter (fast reject)
+    if (Math.max(a.x, b.x) < Math.min(p.x, q.x)) return false;
+    if (Math.min(a.x, b.x) > Math.max(p.x, q.x)) return false;
+    if (Math.max(a.y, b.y) < Math.min(p.y, q.y)) return false;
+    if (Math.min(a.y, b.y) > Math.max(p.y, q.y)) return false;
+
+    // 2. straddling test
+    // which side of line a->b are p and q on?
+    const d1 = _cross(a, b, p);
+    const d2 = _cross(a, b, q);
+    // which side of line p->q are q and b on?
+    const d3 = _cross(p, q, a);
+    const d4 = _cross(p, q, b);
+
+    if (_oppositeSides(d1, d2) && _oppositeSides(d3, d4)) {
+        // proper crossing, now check if it is a shared endpoint
+        if (_samePoint(a, p) || _samePoint(a, q) ||
+            _samePoint(b, p) || _samePoint(b, q)) return false;
+        return true;
+    }
+
+    // 3. collinear / T-intersection
+    if (d1 === 0 && _onSegment(a, b, p) && !_samePoint(p, a) && !_samePoint(p, b)) return true;
+    if (d2 === 0 && _onSegment(a, b, q) && !_samePoint(q, a) && !_samePoint(q, b)) return true;
+    if (d3 === 0 && _onSegment(p, q, a) && !_samePoint(a, p) && !_samePoint(a, q)) return true;
+    if (d4 === 0 && _onSegment(p, q, b) && !_samePoint(b, p) && !_samePoint(b, q)) return true;
+
+    return false;
+}
+
+// 2D cross product of vectors origin->target and origin->point
+// positive: point is to the left, negative: right, zero: collinear
+function _cross(origin, target, point) {
+    return (target.x - origin.x) * (point.y - origin.y)
+         - (target.y - origin.y) * (point.x - origin.x);
+}
+
+// true if a and b are on strictly opposite sides (not on line)
+function _oppositeSides(a, b) {
+    return (a > 0 && b < 0) || (a < 0 && b > 0);
+}
+
+// true if point r lies on segment p->q
+function _onSegment(p, q, r) {
+    return Math.min(p.x, q.x) <= r.x && r.x <= Math.max(p.x, q.x)
+        && Math.min(p.y, q.y) <= r.y && r.y <= Math.max(p.y, q.y)
+}
+
+function _samePoint(a, b) {
+    return a.x === b.x && a.y === b.y;
 }
 
 export function drawSegment(a, b, color, svg) {
