@@ -67,6 +67,7 @@ export function addLineMarkers() {
 
 // two-click flow: first click selects start, second click draws the segment
 export function onCellClick(e) {
+    if (gameState.gameOver) return;
     const td = e.currentTarget;
     const x = Number(td.dataset.x);
     const y = Number(td.dataset.y);
