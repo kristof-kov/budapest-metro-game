@@ -139,3 +139,89 @@ button {
 #player-name.error {
   border-color: red;
 }
+
+/* --- leaderboard button --- */
+.lb-btn {
+  background: transparent;
+  color: #4b006e;
+  border: 2px solid #4b006e;
+}
+ 
+.lb-btn:hover {
+  background-color: #4b006e;
+  color: #fff;
+}
+ 
+/* --- leaderboard panel --- */
+.lb-panel {
+  background-color: #4C0E5F;
+  color: white;
+  padding: 2rem 2.5rem;
+  border-radius: 1.5rem;
+  width: 480px;
+  margin-left: 2rem;
+}
+ 
+.lb-panel.hidden {
+  display: none;
+}
+ 
+.lb-panel h2 {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+}
+ 
+/* --- leaderboard table --- */
+.lb-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+ 
+.lb-table th {
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  opacity: 0.7;
+  font-weight: normal;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+ 
+.lb-table td {
+  padding: 0.5rem 0.6rem;
+}
+ 
+.lb-table tbody tr:hover {
+  background: rgba(255,255,255,0.08);
+}
+ 
+.lb-table tr.lb-first td {
+  font-weight: bold;
+  color: #FFD800;
+}
+ 
+.lb-rank { opacity: 0.6; width: 2rem; }
+.lb-score { text-align: right; font-weight: bold; }
+.lb-time, .lb-date { opacity: 0.75; font-size: 0.85rem; }
+ 
+.lb-empty {
+  opacity: 0.7;
+  font-style: italic;
+  text-align: center;
+  padding: 1rem 0;
+}
+ 
+.lb-close-btn {
+  margin-top: 1.2rem;
+  background: transparent;
+  color: white;
+  border: 2px solid rgba(255,255,255,0.4);
+  font-size: 0.9rem;
+  padding: 0.5rem 1.2rem;
+}
+ 
+.lb-close-btn:hover {
+  border-color: white;
+  background: rgba(255,255,255,0.1);
+}
