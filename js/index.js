@@ -68,3 +68,9 @@ window.addEventListener('click', (e) => {
         closeRules();
     }
 })
+
+nameInput.addEventListener('keydown', (e) => {
+    if (e.code === "Enter") {
+        startGame();
+    }
+})
