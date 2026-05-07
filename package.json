@@ -1,0 +1,24 @@
+{
+  "name": "budapest-trains-game",
+  "version": "1.0.0",
+  "description": "A single-player browser game based on [Next Station: London](https://www.boardgamegeek.com/boardgame/353545/next-station-london), set in Budapest. Build four metro lines, connect districts, cross the Danube, hit train stations and get points.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kristof-kov/budapest-metro-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kristof-kov/budapest-metro-game/issues"
+  },
+  "homepage": "https://github.com/kristof-kov/budapest-metro-game#readme",
+  "devDependencies": {
+    "vitest": "^4.1.5"
+  }
+}
