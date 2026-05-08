@@ -72,12 +72,20 @@ td img.layer-bg {
 td img.layer-icon {
     z-index: 4;
     pointer-events: none;
+    width: 80%;
+    height: 80%;
+    top: 12%;
+    left: 12%;
 }
  
 /* Layer 4: line start markers (M1/M2/M3/M4 badges), above icons */
 td img.layer-line-marker {
     z-index: 5;
     pointer-events: none;
+    width: 80%;
+    height: 80%;
+    top: 12%;
+    left: 12%;
 }
 
 /* --- highlight (selected cell) --- */
