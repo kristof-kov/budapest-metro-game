@@ -61,18 +61,32 @@ td img {
     left: 0;
 }
 
-td img.base-layer {
+/* Layer 1: background (empty.svg) */
+td img.layer-bg {
     z-index: 1;
 }
-
-td img.line {
-    position: absolute;
-    top: 0;
-    left: 0;
+ 
+/* Layer 2: colored metro lines (drawn onto the SVG overlay, z-index: 2 set inline) */
+ 
+/* Layer 3: transparent station icon, sits above the lines */
+td img.layer-icon {
+    z-index: 4;
     pointer-events: none;
-    z-index: 2;
+    width: 80%;
+    height: 80%;
+    top: 12%;
+    left: 12%;
 }
-
+ 
+/* Layer 4: line start markers (M1/M2/M3/M4 badges), above icons */
+td img.layer-line-marker {
+    z-index: 5;
+    pointer-events: none;
+    width: 80%;
+    height: 80%;
+    top: 12%;
+    left: 12%;
+}
 
 /* --- highlight (selected cell) --- */
 .highlight {

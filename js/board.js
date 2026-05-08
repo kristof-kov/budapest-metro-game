@@ -11,7 +11,7 @@ let _svg = null;
 export function createSVGOverlay() {
     const boardPanel = document.querySelector(".board-panel");
     _svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    _svg.style.cssText = "position:absolute;top:0;left:0;width:700px;height:700px;pointer-events:none;";
+    _svg.style.cssText = "position:absolute;top:0;left:0;width:700px;height:700px;pointer-events:none;z-index:2";
     boardPanel.style.position = "relative";
     boardPanel.appendChild(_svg);
 }
@@ -31,15 +31,32 @@ export function generateTable() {
             td.dataset.x = x;
             td.dataset.y = y;
 
+            // layer 1: background
+            const bg = document.createElement("img");
+            bg.src = "assets/empty.svg";
+            bg.alt = "background";
+            bg.classList.add("layer-bg");
+
+            td.appendChild(bg)
+
             const station = stations.find(s => s.x === x && s.y === y);
             if (station) {
+                // layer 3: station icon
                 const name = station.type === "?" ? "Deak" : station.type;
-                const suffix = station.train ? "_Train" : "";
-                td.innerHTML = `<img src="assets/${name}${suffix}.svg" alt="${station.type}">`;
+                const suffix = station.train ? "_Train_noBG" : "";
+
+                const noBGSrc = station.train
+                    ? `assets/${name}${suffix}.svg`
+                    : `assets/${name}_noBG.svg`;
+ 
+                const icon = document.createElement("img");
+                icon.src = noBGSrc;
+                icon.alt = station.type;
+                icon.classList.add("layer-icon");
+ 
+                td.appendChild(icon);
                 td.classList.add("station");
                 td.dataset.stationType = station.type;
-            } else {
-                td.innerHTML = `<img src="assets/empty.svg" alt="empty">`;
             }
 
             td.addEventListener("click", onCellClick);
@@ -58,8 +75,8 @@ export function addLineMarkers() {
         if (!start) return;
 
         const img = document.createElement("img");
-        img.src = `assets/${line.name}.svg`;
-        img.classList.add("line");
+        img.src = `assets/${line.name}_noBG.svg`;
+        img.classList.add("layer-line-marker");
         img.dataset.line = line.name;
         table.rows[start.y].cells[start.x].appendChild(img);
     });
