@@ -53,8 +53,31 @@ export function renderLineOrder() {
 
 export function renderCard(cardText, isSwitchCard) {
     const el = document.querySelector("#current-card");
-    el.textContent = cardText;
     el.classList.toggle("switch-active", isSwitchCard);
+ 
+    // determine which platform image to use
+    const platform = gameState.currentCardType; // "inner" | "outer"
+    const variantSrc = platform === "inner"
+        ? "assets/card_inside.svg"
+        : "assets/card_outside.svg";
+ 
+    // determine the station letter icon to overlay
+    const card = gameState.currentCard; // "A" | "B" | "C" | "D" | "Joker" | "Váltó"
+    let iconSrc = null;
+    if (card === "Joker") {
+        iconSrc = "assets/Deak_noBG.svg";
+    } else if (card !== "Váltó" && card !== null) {
+        iconSrc = `assets/${card}_noBG.svg`;
+    }
+ 
+    // build the card visual
+    el.title = cardText; // keep label for accessibility / tooltip
+    el.innerHTML = `
+        <div class="card-visual">
+            <img class="card-variant-bg" src="${variantSrc}" alt="${platform} platform">
+            ${iconSrc ? `<img class="card-letter-icon" src="${iconSrc}" alt="${card}">` : ""}
+        </div>
+    `;
 }
 
 export function renderDrawButtonLabel(isLastDraw) {

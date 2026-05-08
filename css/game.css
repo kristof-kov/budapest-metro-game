@@ -131,22 +131,45 @@ td img.layer-line-marker {
 }
 
 .card-display {
-    background-color: white;
-    border: 3px solid #999;
-    border-radius: 10px;
-    padding: 20px 15px;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    min-height: unset;
+    display: block;
 }
 
-.card-display.switch-active {
-    background-color: #ffe6a0;
+.card-visual {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 5 / 3;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 3px solid #999;
+    background: #fff;
+}
+
+.card-display.switch-active .card-visual {
     border-color: #ff9800;
+    background-color: #ffe6a0;
+}
+
+.card-variant-bg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+ 
+/* station letter icon */
+.card-letter-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 55%;
+    pointer-events: none;
+    /* filter: drop-shadow(0 2px 4px rgba(0,0,0,0.35)); */
 }
 
 #draw-card-btn {
